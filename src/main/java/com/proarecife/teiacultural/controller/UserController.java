@@ -47,11 +47,7 @@ public class UserController {
 
     @Operation(summary = "Delete a User by ID", tags = "User")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable long id) {
-        if (userService.findById(id) != null) {
-            userService.deleteById(id);
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+    public void delete(@PathVariable long id) {
+            userService.delete(id);
     }
 }

@@ -21,7 +21,8 @@ import java.util.List;
 @Table(name = "users", schema = "TEIACULTURAL")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_sq")
+    @SequenceGenerator(schema = "TEIACULTURAL", name = "user_sq", sequenceName = "users_sq", initialValue = 1, allocationSize = 1)
     private long id;
 
     @NotBlank(message = "Name is mandatory")
@@ -60,4 +61,7 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private Localization localization;
+
+    public void setId(Long id) {
+    }
 }

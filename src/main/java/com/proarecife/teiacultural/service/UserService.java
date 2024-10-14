@@ -23,15 +23,15 @@ public class UserService {
         return optionalUser.orElse(null);
     }
 
-    public void deleteById(Long id) {
-        if (userRepository.existsById(id)) {
-            userRepository.deleteById(id);
-        }
+    public void delete(Long id) {
+        User user = new User();
+        user.setId(id);
+        userRepository.delete(user);
     }
 
     public User update(Long id, User user) {
         if (userRepository.existsById(id)) {
-            user.setId(id);
+            User userFound = findById(id);
             return userRepository.save(user);
         }
         return null;
